@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eaglercraft Launcher</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+      body {
+        display: flex;
+        margin: 0px;
+        background-color: #1f1f1f;
+        color: white;
+        font-family: "Roboto", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        min-height: 100vh;
+        height: 100%;
+        flex-direction: column;
+        text-rendering: optimizeLegibility !important;
+        -webkit-font-smoothing: antialiased !important;
+        text-align: center;
+      }
+
+      #mount {
+        flex: 1;
+        padding: 25px;
+        height: 100%;
+        min-height: 100%;
+        text-align: center;
+      }
+
+      input,
+      select,
+      button {
+        transition: 0.5s;
+        background-color: #353232;
+        border: none;
+        border-radius: 0.5em;
+        color: white;
+        padding: 10px;
+        margin: 5px;
+      }
+
+      select {
+        position: relative;
+      }
+
+      input:hover,
+      select:hover,
+      button:hover {
+        background-color: #484444;
+      }
+
+      .error {
+        border: red 2px solid;
+      }
+
+      #playframe {
+        width: 100%;
+        height: 100%;
+        min-height: 100vh;
+        border: none;
+        margin: none;
+        padding: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="mount"></div>
+    <script>
+      var version = "Select a version!";
+      let verlist = {
+        "1.12.2 (WASM GC)": "/versions/1.12.2/WASM/",
+        "1.12.2": "/versions/1.12.2/",
+        "1.8.8 (WASM GC)": "/versions/1.8.8/WASM/",
+        "1.8.8 EaglerForge": "/versions/EaglerForge1.8.html",
+        "1.8.8": "/versions/1.8.8/",
+      };
+
+      function elementcreate(type, parent, content, attributes = null) {
+        var element = document.createElement(type);
+        element.innerHTML = content;
+        if (attributes !== null) {
+          for (let first in attributes) {
+            if (attributes.hasOwnProperty(first)) {
+              let second = attributes[first];
+              element.setAttribute(first, second);
+            }
+          }
+        }
+        parent.appendChild(element);
+        return element;
+      }
+
+      function del(element) {
+        element.remove();
+      }
+
+      function play() {
+
+        if(version == "Select a version!"){
+          pass;
+        }
+
+        del(document.getElementById("selectinggg"));
+        del(document.getElementById("mount"));
+        console.log("Launching eaglercraft. URL: " + version);
+        elementcreate("iframe", document.body, "", {
+          "src": version,
+          "id": "playframe",
+          "allowfullscreen": "",
+        });
+      }
+
+      function init() {
+        let parent = document.getElementById("mount");
+
+        selector = elementcreate("div", parent, "", {
+          "id":"selectinggg"
+        });
+
+        elementcreate("h1", selector, "Select your EaglerCraft version:", {
+          "id": "text"
+        });
+
+        elementcreate("p", selector, "(if you have any clients you want here, <br>email me at watrabi@watrlabs.lol)");
+
+
+        let verselect = elementcreate("select", selector, "", {
+          "id": "selector"
+        });
+        verselect.addEventListener('change', function() {
+          version = verselect.value;
+        });
+
+        elementcreate("option", verselect, "Select a version!", {
+            "value": "Select a version!"
+        });
+
+        for (let x in verlist) {
+          elementcreate("option", verselect, x, {
+            "value": verlist[x]
+          });
+        }
+        elementcreate("button", selector, "Play!", {
+          "onclick": "play();",
+          "id": "playbutton"
+        });
+      }
+      
+      init();
+      document.addEventListener('keydown', function(event) {
+          if(event.key == "Enter"){
+            alert("HI");
+          }
+      });
+
+    </script>
+  </body>
+</html>
