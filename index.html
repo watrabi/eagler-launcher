@@ -73,11 +73,24 @@
 
       var version = "Select a version!";
       let verlist = {
+      "1.12.2 Tuff Client (Beta)": "/versions/tuff1.12/js/",
+        "1.12.2 Tuff Client (WASM) (Beta)": "/versions/tuff1.12/",
+        "1.12.2 Tuff Client (WASM) (Release)": "/versions/tuff112-stable/",
+        "1.12.2 Tuff Client (Release)": "/versions/tuff112-stable/js/",
         "1.12.2 (WASM GC)": "/versions/1.12.2/WASM/",
         "1.12.2": "/versions/1.12.2/",
         "1.8.8 (WASM GC)": "/versions/1.8.8/WASM/",
         "1.8.8 EaglerForge": "/versions/EaglerForge1.8.html",
         "1.8.8": "/versions/1.8.8/",
+      };
+      
+      let unstablelist = [
+          "/versions/tuff1.12/",
+          "/versions/tuff1.12/js/"
+      ];
+      
+      let downloadlist = {
+          "1.12.2 Tuff Client (WASM)": "/"
       };
 
       function elementcreate(type, parent, content, attributes = null) {
@@ -108,6 +121,10 @@
         del(document.getElementById("selectinggg"));
         del(document.getElementById("mount"));
         console.log("Launching eaglercraft. URL: " + version);
+        
+        if(unstablelist.indexOf(version) == 1){
+            alert("This version is unstable, expect issues.");
+        }
         elementcreate("iframe", document.body, "", {
           "src": version,
           "id": "playframe",
@@ -126,7 +143,7 @@
           "id": "text"
         });
 
-        elementcreate("p", selector, "(if you have any clients you want here, <br>email me at watrabi@watrlabs.lol)");
+        elementcreate("p", selector, "(if you have any clients you want here, <br>dm me on discord at watrabi,<br>or email me at itswaterboi@gmail.com)");
 
 
         let verselect = elementcreate("select", selector, "", {
